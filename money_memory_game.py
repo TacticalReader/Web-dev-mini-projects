@@ -108,11 +108,14 @@ class MemoryGame:
     def play_sound_win(self):
         # Simple sound feedback for successful completion
         try:
-            import winsound
-            winsound.Beep(600, 250)
-            winsound.Beep(800, 450)
-        except Exception:
-            pass  # skip if unsupported (Linux/macOS or no winsound)
+           try:
+    import winsound
+    winsound.Beep(600, 250)
+    winsound.Beep(800, 450)
+except (ImportError, RuntimeError, AttributeError):
+    # winsound not available, skip sound
+    pass
+
 
 if __name__ == "__main__":
     root = tk.Tk()
